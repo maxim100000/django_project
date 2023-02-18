@@ -1,0 +1,29 @@
+{% extends 'default.html' %}
+{% load custom_filters %}
+{% block title %} <h1>Новости</h1> {% endblock %}
+
+{% block main %}
+        <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Date</th>
+                
+            </tr>
+        </thead>
+    {% for item in news %}
+        <tbody>
+        
+            <tr>
+                <td>{{ item.title }}</td>
+                <td>{{ item.text|truncatechars:50 }}</td>
+                <td>{{ item.date_time|date:'d m Y' }}</td>
+                
+            </tr>
+        </tbody>
+        
+    {% endfor %}
+        </table>
+{% endblock %}
+
