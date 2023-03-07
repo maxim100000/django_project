@@ -7,6 +7,9 @@ from django.contrib.auth.models import User
 class Author(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     rating = models.IntegerField(help_text='Рейтинг пользователя')
+    
+    def __str__(self):
+        return f'{self.user.username}'
 
     def update_rating(self):
         overall_article_rating = sum([x['rating'] for x in self.post_set.values('rating')]) * 3 
@@ -17,6 +20,9 @@ class Author(models.Model):
         
 class Category(models.Model):
     name = models.CharField(max_length=20, help_text='Категория новостей/статей', unique=True)
+    
+    def __str__(self):
+        return f'{self.name}'
 
 
 class Post(models.Model):

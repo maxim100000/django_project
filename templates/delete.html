@@ -1,0 +1,32 @@
+{% extends 'default.html' %}
+
+{% block main %}
+    <h2>Вы действительно хотите удалить данный товар?</h2>
+    <table>
+        <thead>
+        <tr>
+
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Quantity</th>
+
+        </tr>
+        </thead>
+    <tbody>
+        <tr>
+            <td>{{ object.title }}</td>
+            <td>{{ object.text }}</td>
+            <td>{{ object.rating }}</td>
+            
+        </tr>
+    
+    </tbody>
+    
+    </table>
+    <form method="post">
+    {% csrf_token %}
+    <input type="submit" value="подтвердить">
+    
+    </form>
+{% endblock %}
