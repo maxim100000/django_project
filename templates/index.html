@@ -1,0 +1,14 @@
+{% extends 'default.html' %}
+{% block main %}
+    <h2>Страница авторизованного пользователя {{ request.user.username }}</h2>
+    <div>Здесь может быть персональная информация</div>
+{% if is_not_author %}  
+        <button><a href="{%  url 'news' %}">Остаться читателем</a> </button>
+        <button><a href="{%  url 'upgrade' %}">Стать автором</a> </button>
+ {% else %}
+        <button><a href="{%  url 'deauthor' %}">Стать читателем</a> </button>
+        <button><a href="{%  url 'news' %}">Продолжить</a> </button>
+    
+{% endif %}
+    
+{% endblock main %}
