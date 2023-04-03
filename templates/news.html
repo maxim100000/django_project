@@ -1,0 +1,81 @@
+{% extends 'default.html' %}
+{% load custom_filters %}
+{% block title %} <h1>Новости</h1> {% endblock %}
+
+{% block main %}
+    <table>
+        <thead>
+        <tr>
+            <th>Ссылки</th>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Date</th>
+
+        </tr>
+        </thead>
+        {% for item in news %}
+            <tbody>
+            
+            <tr>
+                <td><a href="{% url 'new' item.id %}">Перейти</a>
+                    <a href="{% url 'edit' item.id %}">Редактировать</a>
+                    <a href="{% url 'delete' item.id %}">Удалить</a>
+                    <a href="{% url 'add' %}">Добавить</a>
+                    <a href="{% url 'search' %}">Поиск</a>
+                </td>
+                 
+                <td>{{ item.title }}</td>
+                <td>{{ item.text|truncatechars:50 }}</td>
+                <td>{{ item.date_time|date:'d m Y' }}</td>
+
+            </tr>
+            </tbody>
+
+        {% endfor %}
+    </table>
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <a href="?page=1">First</a>
+            <a href="?page={{ page_obj.previous_page_number }}"><<<</a>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <a>{{ num }}</a>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">>>></a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        {% endif %}
+
+    {% endif %}
+    
+    <form method="post" action="/unsubscribe/" style="margin-left: 90%">
+    {% csrf_token %}
+        <select id="category" class="mt-2" name="category">
+            <option value="1">Политика</option>
+            <option value="2">Спорт</option>
+            <option value="3">Кино</option>
+            <option value="4">Поп-музыка</option>
+        </select>
+        <input type="submit" value="Отписаться" class="mt-2">
+    </form>
+
+    <form method="post" action="/subscribe/" style="margin-left: 90%">
+    {% csrf_token %}
+        <select id="category" class="mt-2" name="category">
+            <option value="1">Политика</option>
+            <option value="2">Спорт</option>
+            <option value="3">Кино</option>
+            <option value="4">Поп-музыка</option>
+            
+        </select>
+        <input type="submit" value="Подписаться" class="mt-2">
+    </form>
+    
+{% endblock main %}
+
