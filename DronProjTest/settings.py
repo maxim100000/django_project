@@ -79,9 +79,9 @@ AUTHENTICATION_BACKENDS = [
 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
-DEFAULT_FROM_EMAIL = "zhma-kin@yandex.ru"
-EMAIL_HOST_USER = "zhma-kin@yandex.ru"
-EMAIL_HOST_PASSWORD = "lnjtvhswismtmkxx"
+DEFAULT_FROM_EMAIL = ""
+EMAIL_HOST_USER = ""
+EMAIL_HOST_PASSWORD = ""
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 
