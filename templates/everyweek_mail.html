@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Подборка</title>
+</head>
+<body>
+<h2>За прошедшую неделю по интересующим вас темам появились объявления:</h2>
+<ul>
+    
+{% for item in items%}
+<li><a href="http://127.0.0.1:8000/news/{{ item.pk }}/">{{ item.title }}</a></li>
+{% endfor %}
+    
+</ul>
+
+</body>
+</html>

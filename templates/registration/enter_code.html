@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enter</title>
+</head>
+<body>
+<form action="{% url 'check' %}" method="post">
+    {% csrf_token %}
+    <label>Введите код
+        <input type="number" name="code">
+    </label>
+    <input type="submit" value="Подтвердите">
+</form>
+</body>
+</html>

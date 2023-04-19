@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete</title>
+</head>
+<body>
+<p><a href="{% url 'preview' %}">Главная</a></p>
+<form method="post">
+    {% csrf_token %}
+    <p>Вы правда хотите удалить запись {{ author.id }} c именем {{ author.name }}</p>
+    <input type="submit">
+</form>
+<a href="{% url 'logout' %} "><button>Logout</button></a>
+</body>
+</html>

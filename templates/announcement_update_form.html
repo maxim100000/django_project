@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update</title>
+</head>
+<body>
+<p>Пользователь:&nbsp;{{ user.username }}</p>
+<p><a href="{% url 'preview' %}">Главная</a></p>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_table }}
+    <input type="submit">
+</form>
+
+<a href="{% url 'logout' %} "><button>Logout</button></a>
+</body>
+</html>

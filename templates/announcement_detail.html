@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+</head>
+<body>
+<p>Пользователь:&nbsp;{{ user.username }}</p>
+<p><a href="{% url 'preview' %}">Главная</a></p>
+<h1>{{ announcement.title }}</h1>
+<p>{{ announcement.content }}</p>
+<p>Автор: {{ announcement.user.username }}</p>
+<p>{{ announcement.date_time }}</p>
+{% if user.username == announcement.user.username  %}
+<p><a href="{% url 'update' announcement.pk %}">Редактировать</a></p>
+{% endif %}
+<p><a href="{% url 'logout' %}">Выйти</a></p>
+</body>
+</html>

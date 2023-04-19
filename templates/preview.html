@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Обзор</title>
+
+</head>
+<body>
+<div>
+    {% if user.username %}
+        <p>Пользователь:&nbsp;{{ user.username }}</p>
+        <p><a href="{% url 'usersrec' %}">Комментарии</a></p>
+        <p><a href="{% url 'create' %}">Создать</a>&nbsp;<a href="{% url 'response' %}">Оставить отзыв</a></p>
+    {% else %}
+        <p>Please, login or register</p>
+
+    {% endif %}
+</div>
+
+{% for i in announcement_list %}
+    <h3>{{ i.title }}</h3>
+    <p>{{ i.content|truncatewords:2 }}</p>
+    <p><i style="font-size: 90%">автор - {{ i.user.username }}</i></p>
+    {% if user.username %}
+        <p><a href="{% url 'detail' i.pk %}">Подробнее</a></p>
+    {% endif %}
+{% endfor %}
+{% if is_paginated %}
+    {% if page_obj.has_previous %}
+        <a href="?page=1">First</a>
+        <a href="?page={{ page_obj.previous_page_number }}"><<<</a>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+            <a>{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <a href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">>>></a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+
+{% endif %}
+{% if user.username %}
+    <p><a href="{% url 'logout' %}">Выйти</a></p>
+{% else %}
+    <p><a href="{% url 'login' %}">Войти</a></p>
+    <p><a href="{% url 'register' %}">Registration</a></p>
+{% endif %}
+</body>
+</html>
